@@ -6,6 +6,6 @@ deps:
 lint:
 	flake8 hello_world test
 test:
-	python py.test
+	pytest
 run:
 	python main.py
