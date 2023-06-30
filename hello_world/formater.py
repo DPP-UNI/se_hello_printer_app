@@ -7,7 +7,6 @@ XML = "xml"
 
 SUPPORTED = [PLAIN, PLAIN_UP, PLAIN_LO, JSON, XML]
 
-
 def get_formatted(msg, imie, format):
     result = ""
     if format == PLAIN:
@@ -22,12 +21,22 @@ def get_formatted(msg, imie, format):
         result = format_to_xml(msg, imie)
     return result
 
+import json
+from lxml import etree
+
+
 def format_to_xml(msg, imie):
-    return ("<greetings>\n\t<name>"+ imie +"</name>\n\t<msg>"+ msg + "</msg>\n</greetings>")
+    root = etree.Element("greetings")
+    etree.SubElement(root, "name").text = imie
+    etree.SubElement(root, "msg").text = msg
+    return (etree.tostring(root, pretty_print=True))
 
 def format_to_json(msg, imie):
-    return ('{ "imie":"' + imie + '", "msg":' +
-            msg + '"}')
+    out = {
+        "name": imie,
+        "msg": msg
+    }
+    return (json.dumps(out))
 
 
 def plain_text(msg, imie):
