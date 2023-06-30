@@ -11,4 +11,4 @@ class TestFormater(unittest.TestCase):
         self.assertTrue(msg.isupper())
     def test_format_to_xml(self):
         r = format_to_xml("wwww", "EEEMSG")
-        self.assertTrue(r == ("<greetings>\n\t<name>EEEMSG</name>\n\t<msg>wwww</msg>\n</greetings>"))
+        self.assertTrue(r == ("<greetings>\n  <name>EEEMSG</name>\n  <msg>wwww</msg>\n</greetings>"))
