@@ -1,5 +1,6 @@
 from hello_world.formater import plain_text_upper_case, format_to_xml
 import unittest
+from lxml import etree
 
 
 class TestFormater(unittest.TestCase):
@@ -11,4 +12,7 @@ class TestFormater(unittest.TestCase):
         self.assertTrue(msg.isupper())
     def test_format_to_xml(self):
         r = format_to_xml("wwww", "EEEMSG")
-        self.assertTrue(r == ("<greetings>\n  <name>EEEMSG</name>\n  <msg>wwww</msg>\n</greetings>"))
+        root = etree.Element("greetings")
+        etree.SubElement(root, "name").text = "EEEMSG"
+        etree.SubElement(root, "msg").text = "wwww"
+        self.assertTrue(r == etree.tostring(root, pretty_print=True))
