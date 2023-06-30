@@ -33,7 +33,7 @@ def format_to_xml(msg, imie):
 
 def format_to_json(msg, imie):
     out = {
-        "name": imie,
+        "imie": imie,
         "msg": msg
     }
     return (json.dumps(out))
